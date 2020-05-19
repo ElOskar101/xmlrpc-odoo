@@ -9,37 +9,81 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_user"
+            />
 
         <EditText
             android:id="@+id/create_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre del contacto"/>
+            android:layout_height="50dp"
+            android:background="@drawable/transparent_border_radius"
+            android:hint="Nombre del contacto"
+            android:inputType="textAutoComplete"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorAccent" />
+
 
         <EditText
             android:id="@+id/create_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Correo electrónico"/>
+            android:layout_height="50dp"
+            android:background="@drawable/transparent_border_radius"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress"
+            android:layout_margin="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorAccent"/>
 
         <EditText
             android:id="@+id/create_address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Dirección"/>
+            android:layout_height="50dp"
+            android:background="@drawable/transparent_border_radius"
+            android:hint="Dirección"
+            android:inputType="textAutoComplete"
+            android:layout_margin="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorAccent"/>
 
         <EditText
             android:id="@+id/create_phone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Número telefónico"/>
+            android:layout_height="50dp"
+            android:background="@drawable/transparent_border_radius"
+            android:hint="Número telefónico"
+            android:inputType="phone"
+            android:layout_margin="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorAccent"/>
 
         <Button
             android:id="@+id/create_contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:focusable="true"
+            android:layout_gravity="center"
             android:text="Crear contacto"
+
+            android:textSize="16sp"
             />
 
     </LinearLayout>
