@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ContactAdapter adapter;
     private FloatingActionButton floating;
+    public static XmlRpcClient models;
+
+
 
 
     private final String url = "https://demo44.odoo.com", // All data we need to connect to our Odoo host
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             final XmlRpcClientConfigImpl common_config = new XmlRpcClientConfigImpl();
 
             // Create a model
-            final XmlRpcClient models = new XmlRpcClient() {{
+            models = new XmlRpcClient() {{
                 setConfig(new XmlRpcClientConfigImpl() {{
                     setServerURL(new URL(String.format("%s/xmlrpc/2/object", url)));
                 }});
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
                 contacts.add(i, element); // Adding each contact as a new model
             }
-            System.out.println(contacts.size() + " <- Primer registro ->"+ contacts); // Ignore it. Just is an old way to debug
+            System.out.println(contacts.size() + " <- Primer registro ->"); // Ignore it. Just was an old way to debug
 
             // Send registers to the adapter
             adapter = new ContactAdapter(contacts, this);
@@ -175,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("uid", uid);
         i.putExtra("db", db);
         i.putExtra("password", password);
+
 
         this.startActivity(i);
     }
