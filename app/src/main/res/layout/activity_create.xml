@@ -12,26 +12,31 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/create_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre del contacto"/>
 
         <EditText
+            android:id="@+id/create_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Correo electrónico"/>
 
         <EditText
+            android:id="@+id/create_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Dirección"/>
 
         <EditText
+            android:id="@+id/create_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Número telefónicol"/>
+            android:hint="Número telefónico"/>
 
         <Button
+            android:id="@+id/create_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Crear contacto"

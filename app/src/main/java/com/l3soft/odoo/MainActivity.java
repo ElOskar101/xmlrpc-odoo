@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.l3soft.odoo.activities.Create;
 import com.l3soft.odoo.adapter.ContactAdapter;
 import com.l3soft.odoo.models.Contact;
 
@@ -36,11 +40,15 @@ public class MainActivity extends AppCompatActivity {
     // Global variables
     private RecyclerView recyclerView;
     private ContactAdapter adapter;
+    private FloatingActionButton floating;
+
 
     private final String url = "https://demo44.odoo.com", // All data we need to connect to our Odoo host
             db = "demo44",
             username = "oscaresga22@gmail.com",
             password = "P@ssword";
+
+    int uid = 0;
 
     List<Object> data  = new ArrayList<>(); // Array to get information from server
     ArrayList<Contact> contacts = new ArrayList<>(); // Array to catch information from server
@@ -54,9 +62,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // We gonna launch another activity with this
+        floating = findViewById(R.id.floating);
+
         // With these we allow internet protocol http
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        // The actions!!
+        InitActions();
 
         // We call initial method
         try {
@@ -64,6 +78,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (MalformedURLException | XmlRpcException e) {
             e.printStackTrace();
         }
+    }
+
+    private void InitActions(){
+        floating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Create(uid);
+            }
+        });
     }
 
     public void Initialize () throws MalformedURLException, XmlRpcException {
@@ -84,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             client.execute(common_config, "version", emptyList());
 
             // Authenticate in the server
-            int uid = Authenticate(client, common_config);
+            uid = Authenticate(client, common_config);
 
             // We can get all id's contacts. Only people are allowed
             final List ids = asList((Object[])models.execute(
@@ -135,16 +158,24 @@ public class MainActivity extends AppCompatActivity {
 
     // Another authentication method. We just need uid.
     private int Authenticate (XmlRpcClient client, XmlRpcClientConfigImpl common_config){
-        int uid = 0;
+        int uido = 0;
         try {
-            uid = (int) client.execute(
+            uido = (int) client.execute(
                     common_config, "authenticate", asList(
                             db, username, password, emptyMap()));
         }catch ( Exception e){
             e.printStackTrace();
             System.out.println("Sorry, That error i was not expecting");
         }
+        return uido;
+    }
 
-        return uid;
+    private void Create (int uid){
+        Intent i = new Intent(this, Create.class);
+        i.putExtra("uid", uid);
+        i.putExtra("db", db);
+        i.putExtra("password", password);
+
+        this.startActivity(i);
     }
 }
